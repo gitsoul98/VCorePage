@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIN ONE RA</title>
+        
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- FONT  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    <!-- FONT END -->
+</head>
+
+<body>
+
+    <div class="aurora"></div>
+
+    <!-- <div class="sidebar">
+
+        <div class="logo">VCore 2.0</div>
+
+        <ul class="menu">
+            <li>Dashboard</li>
+            <li>Users</li>
+            <li>Roles</li>
+            <li>Branches</li>
+            <li>Tariffs</li>
+            <li>Settings</li>
+        </ul>
+
+    </div> -->
+
+    <div class="main">
+
+        <div class="navbar">
+            <h1>Dashboard Overview</h1>
+
+            <button id="themeBtn" class="toggle-btn">
+                <i class="fas fa-palette"></i>
+            </button>
+        </div>
+
+        <div class="card table-card">
+
+            <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+">
+
+                <h3 style="margin:0;">
+                    Recent Transactions
+                </h3>
+
+                <button id="btnAddUser" style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+
+        padding:10px 18px;
+
+        border:none;
+        border-radius:12px;
+
+        background:#14b8a6;
+        color:white;
+
+        font-size:14px;
+        font-weight:600;
+
+        cursor:pointer;
+
+        transition:all .25s ease;
+    ">
+                    <i class="fa fa-plus"></i>
+                    Add User
+                </button>
+
+            </div>
+
+            <!-- End  -->
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table id="UserTable">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- new style  -->
+            <div id="bulkToolbar" style="
+        display:none;
+        margin-bottom:15px;
+        padding:15px;
+        border-radius:12px;
+        background:var(--card);
+        border:1px solid var(--border);
+        justify-content:space-between;
+        align-items:center;">
+
+                <div style="font-size:14px; color:#0f766e;">
+                    <span id="selectedCount">0</span> row(s) selected
+                </div>
+
+                <div style="display:flex;gap:10px;">
+
+                    <button id="activeBtn" style="
+                    padding:8px 16px;
+                    border:none;
+                    border-radius:8px;
+                    background:#22c55e;
+                    color:white;">
+                        Active
+                    </button>
+
+                    <button id="inactiveBtn" style="
+                    padding:8px 16px;
+                    border:none;
+                    border-radius:8px;
+                    background:#ef4444;
+                    color:white;">
+                        Inactive
+                    </button>
+
+                </div>
+
+            </div>
+            <!-- new style end  -->
+
+        </div>
+
+        <div class="footer">
+            Premium Theme Transition Demo
+        </div>
+    </div>
+
+
+
+
+    <!--  -->
+    <!-- Add User Modal -->
+    <div id="addModal" class="modal-overlay">
+
+        <div class="card modal-card">
+
+            <div class="modal-header">
+
+                <h3>Add User</h3>
+
+                <button class="modal-close">&times;</button>
+
+            </div>
+
+            <div class="modal-row">
+
+                <label>Customer</label>
+
+                <input type="text" id="addCustomer">
+
+            </div>
+
+            <div class="modal-row">
+
+                <label>Amount</label>
+
+                <input type="text" id="addAmount">
+
+            </div>
+
+            <div class="modal-row">
+
+                <label>Status</label>
+
+                <select id="addStatus">
+
+                    <option>Completed</option>
+                    <option>Pending</option>
+                    <option>Processing</option>
+
+                </select>
+
+            </div>
+
+            <div style="text-align:right;margin-top:20px;">
+
+                <button id="saveAddBtn" class="theme-btn">
+
+                    Save User
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- View Modal -->
+    <div id="viewModal" class="modal-overlay">
+
+        <div class="card modal-card">
+
+            <div class="modal-header">
+
+                <h3>View Transaction</h3>
+
+                <button class="modal-close">&times;</button>
+
+            </div>
+
+            <table style="width:100%;">
+
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td id="viewId"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Customer</strong></td>
+                    <td id="viewCustomer"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Amount</strong></td>
+                    <td id="viewAmount"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td id="viewStatus"></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay">
+
+        <div class="card modal-card">
+
+            <div class="modal-header">
+
+                <h3>Edit Transaction</h3>
+
+                <button class="modal-close">&times;</button>
+
+            </div>
+
+            <input type="hidden" id="editIndex">
+
+            <div class="modal-row">
+
+                <label>Customer</label>
+
+                <input type="text" id="editCustomer">
+
+            </div>
+
+            <div class="modal-row">
+
+                <label>Amount</label>
+
+                <input type="text" id="editAmount">
+
+            </div>
+
+            <div class="modal-row">
+
+                <label>Status</label>
+
+                <select id="editStatus">
+
+                    <option>Completed</option>
+                    <option>Pending</option>
+                    <option>Processing</option>
+
+                </select>
+
+            </div>
+
+            <div style="text-align:right;margin-top:20px;">
+
+                <button id="saveEditBtn" class="theme-btn">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--  -->
+
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+        <!-- <script src="script.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
